@@ -6,6 +6,7 @@ public class ClickToPlay : MonoBehaviour
 {
     public AudioSource source;
     public AudioClip snare;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,11 @@ public class ClickToPlay : MonoBehaviour
     
     }
     private void PrintName(GameObject go){
+        
+        anim.Play("empty");
+    
         source.PlayOneShot(snare);
+
        
     }
 }
