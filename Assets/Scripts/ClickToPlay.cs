@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ClickToPlay : MonoBehaviour
 {
-    public AudioSource source;
-    public AudioClip snare;
+    public AudioSource tom4;
+    
     public Animator anim;
     // Start is called before the first frame update
     void Start()
@@ -21,18 +21,16 @@ public class ClickToPlay : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
     if(Physics.Raycast(ray,out hit, 1000.0f)){
         if(hit.transform){
-            PrintName(hit.transform.gameObject);
+            play(hit.transform.gameObject,hit.transform.gameObject.GetComponent<AudioSource>(),hit.transform.gameObject.GetComponent<AudioSource>().clip);
         }
     }
     
         }
     
     }
-    private void PrintName(GameObject go){
+    private void play(GameObject go,AudioSource source,AudioClip sound){
         
-        anim.Play("empty");
-    
-        source.PlayOneShot(snare);
+        source.PlayOneShot(sound);
 
        
     }
