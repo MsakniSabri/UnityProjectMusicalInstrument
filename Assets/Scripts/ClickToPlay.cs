@@ -31,7 +31,15 @@ public class ClickToPlay : MonoBehaviour
     private void play(GameObject go,AudioSource source,AudioClip sound){
         
         source.PlayOneShot(sound);
-
+        if(go.GetComponent<Animation>())
+        go.GetComponent<Animation>().Play();
+     
+        if (go.transform.parent!= null){
+            if(go.transform.parent.GetComponent<Animation>()){
+            go.transform.parent.GetComponent<Animation>().Play();
+            }
+        }
+            
        
     }
 }
