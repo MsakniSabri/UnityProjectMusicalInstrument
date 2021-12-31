@@ -89,10 +89,10 @@ public class ClickToPlay : MonoBehaviour
     {
         //TODO
         
-        print( notes[1][note] + "+" + notes[2][note] + "+" + notes[3][note]);
+        //print( notes[1][note] + "+" + notes[2][note] + "+" + notes[3][note]);
           if(notes[1][note]==currentNote || notes[2][note] == currentNote || notes[3][note] == currentNote){
             score+=10;
-            Debug.Log(score);
+            //Debug.Log(score);
           }
 
         StartCoroutine(noteTimer(note));
