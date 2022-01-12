@@ -15,29 +15,62 @@ public class MainScript : MonoBehaviour
     public GameObject snare;
     public GameObject bassDrum;
 
+     public bool start_snare=false;
+    public bool start_bassdrum = false;
+    public bool start_hihat = false;
 
     public GameObject snareFake;
     public GameObject bassDrumFake;
-
+    
     public Material greenMaterial;
     public Material greyMaterial;
-
+    public GameObject snare_token;
+    public GameObject symbal_token;
+    public GameObject tom1_token;
+    public GameObject tom2_token;
+    public GameObject floortom_token;
+    public GameObject hihat_token;
+    public GameObject crass_token;
+    public GameObject bassdrum_token;
+    float v=0.25862069f;
+    float b = 1.03448276f;
+    public Vector3 vec_hihat;
+    public Quaternion qua_hihat;
     public int score;
     public Text scoreText;
-    public int currentMode = 0; //1 = play //2 = game
-
+    public int currentMode = 1; //1 = play //2 = game
+   Token t_hihat;
     // Start is called before the first frame update
     void Start()
     {
+
+        start_snare = false;
+        start_bassdrum = false;
+        start_hihat = false;
         string name = "billiejean";
         readCSV(name);
-
+        playSong();
         //GameEvents.current.onInstrumentTrigger += playInstrument;
+
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+
+falling(hihat_token, start_hihat, 3.0f, 0.25862069f);
+
+        falling(snare_token, start_snare, 3.0f, 1.03448276f);
+
+        falling(bassdrum_token, start_bassdrum, 3.0f,1.03448276f);
+        falling(tom1_token, false, 3.0f, 0.25862069f);
+
+        falling(tom2_token, false, 3.0f, 1.03448276f);
+
+        falling(floortom_token, false, 3.0f, 1.03448276f);
+        falling(crass_token, false, 3.0f, 1.03448276f);
+        falling(symbal_token, false, 3.0f, 1.03448276f);
+      
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -100,9 +133,11 @@ public class MainScript : MonoBehaviour
 
             } else if (currentMode == 2)
             {
+                
                 setCurrentNotes(count);
             }
             count++;
+            
             yield return new WaitForSeconds(0.25862069f);
         }
 
@@ -111,30 +146,45 @@ public class MainScript : MonoBehaviour
 
     void playNextNote(int note)
     {
-
-        print("playing: " + notes[1][note] + " + " + notes[2][note] + " + " + notes[3][note]);
+        if(notes[1][note]=="hihat"){
+            start_hihat = true;
+        }
+        if(notes[2][note]=="snare"){
+            start_snare = true;
+        }
+        if(notes[3][note]=="bassdrum"){
+            start_bassdrum = true;
+        }
+         /* print("playing: " + notes[1][note] + " + " + notes[2][note] + " + " + notes[3][note]);  */
         //hihat.GetComponent<MeshRenderer>().material = greyMaterial;
         //bassDrum.GetComponent<MeshRenderer>().material = greyMaterial;
         //snare.GetComponent<MeshRenderer>().material = greyMaterial;
-
+        
         for (int i=1; i <= 3; i++)
         {
             if (notes[i][note] == "hihat")
             {
+
+                
                 play(hihat, hihat.GetComponent<AudioSource>(), hihat.GetComponent<AudioSource>().clip);
                 //hihat.GetComponent<MeshRenderer>().material = greenMaterial;
+
+               
             }
             else if (notes[i][note] == "bassdrum")
             {
+               
                 play(bassDrum, bassDrum.GetComponent<AudioSource>(), bassDrum.GetComponent<AudioSource>().clip);
                 //bassDrumFake.GetComponent<MeshRenderer>().material = greenMaterial;
             }
             else if (notes[i][note] == "snare")
             {
+                
                 play(snare, snare.GetComponent<AudioSource>(), snare.GetComponent<AudioSource>().clip);
                 //snareFake.GetComponent<MeshRenderer>().material = greenMaterial;
             }
         }
+       
         /*foreach (string o in notes[note])
             {
                 
@@ -156,7 +206,12 @@ public class MainScript : MonoBehaviour
 
 
         //playNote("hihat");
-        print("playing: " + notes[1][note] + " + " + notes[2][note] + " + " + notes[3][note]);
+
+
+        
+
+        
+      /*    print("playing: " + notes[1][note] + " + " + notes[2][note] + " + " + notes[3][note]);  */
         /*string message = "Current notes: ";
         foreach (string n in currentNotes)
         {
@@ -185,6 +240,7 @@ public class MainScript : MonoBehaviour
 
     private void play(GameObject go, AudioSource source, AudioClip sound)
     {
+       
         source.PlayOneShot(sound);
     }
 
@@ -225,4 +281,29 @@ public class MainScript : MonoBehaviour
         score++;
         scoreText.text = "Score: " + score.ToString();
     }
+
+
+
+public void falling(GameObject go,bool on,float s , float t){
+        
+        if(on){
+        go.GetComponent<Renderer>().enabled = true;
+        go.transform.Translate(-Vector3.forward * (s / t) * Time.deltaTime);}else{
+
+            go.GetComponent<Renderer>().enabled = false;
+        }
+}
+
+public void activate(GameObject go,bool on,float s ,float t){
+
+        if (on == false) { go.GetComponent<Renderer>().enabled = false; }
+        if (on == true)
+        {
+            go.GetComponent<Renderer>().enabled = true;
+           
+        }
+}
+
+   
+
 }
