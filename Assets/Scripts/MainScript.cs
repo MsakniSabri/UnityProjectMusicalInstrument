@@ -54,7 +54,7 @@ public class MainScript : MonoBehaviour
 
     void Update()
     {
-            if (Input.GetMouseButtonDown(0))
+            /*if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -69,7 +69,7 @@ public class MainScript : MonoBehaviour
                     }
                 }
 
-            }
+            }*/
     }
 
 
