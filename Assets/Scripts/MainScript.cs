@@ -164,24 +164,28 @@ falling(hihat_token, start_hihat, 3.0f, 0.25862069f);
         {
             if (notes[i][note] == "hihat")
             {
-
+              if(currentMode==2){
                 
                 play(hihat, hihat.GetComponent<AudioSource>(), hihat.GetComponent<AudioSource>().clip);
                 //hihat.GetComponent<MeshRenderer>().material = greenMaterial;
-
+              }
                
             }
             else if (notes[i][note] == "bassdrum")
             {
-               
+                if (currentMode == 2)
+                {
                 play(bassDrum, bassDrum.GetComponent<AudioSource>(), bassDrum.GetComponent<AudioSource>().clip);
                 //bassDrumFake.GetComponent<MeshRenderer>().material = greenMaterial;
+                }
             }
             else if (notes[i][note] == "snare")
             {
-                
+                if (currentMode == 2)
+                {
                 play(snare, snare.GetComponent<AudioSource>(), snare.GetComponent<AudioSource>().clip);
                 //snareFake.GetComponent<MeshRenderer>().material = greenMaterial;
+                }
             }
         }
        

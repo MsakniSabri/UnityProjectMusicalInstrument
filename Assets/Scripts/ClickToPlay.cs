@@ -48,14 +48,14 @@ public class ClickToPlay : MonoBehaviour
         if(go.GetComponent<Animation>()){
         go.GetComponent<Animation>().Play();
         currentNote= go.name;
-            go.GetComponent<MeshRenderer>().material = Material;
+            
         }
         
         if (go.transform.parent!= null){
             if(go.transform.parent.GetComponent<Animation>()){
             go.transform.parent.GetComponent<Animation>().Play();
                 currentNote= go.name;
-                go.transform.parent.GetComponent<MeshRenderer>().material = Material;
+
             }
         }
         currentNote= "";
