@@ -9,7 +9,7 @@ public class ClickToPlay : MonoBehaviour
     public  string currentNote="";
     // Start is called before the first frame update
      List<List<string>> notes = new List<List<string>>();
-    Song currentSong;
+
     public int score =0;   
     // Start is called before the first frame update
     void Start()
